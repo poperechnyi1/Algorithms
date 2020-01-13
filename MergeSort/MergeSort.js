@@ -1,4 +1,4 @@
-let arrayForSorting = [41, 58, 31, 59, 26, 41, 0, -1, 225, 516, -1488, -666];
+let arrayForSorting = [41, 58, 31];  //[41, 58, 31, 59, 26, 41, 0, -1, 225, 516, -1488, -666];
 let temporaryArray = [];
 
 let counter = 0
@@ -21,6 +21,10 @@ let iteration = 0;
 console.log(21, merge(temporaryArray));
 
 function merge(array) {
+    if(array.length < 2)
+    {
+        return array;
+    }
 
     console.log(25, array);
     console.log('Iteration ', iteration);
@@ -29,25 +33,23 @@ function merge(array) {
     {
         let subArrayFirst = array[i];
         let subArraySecond = array[i + 1];
-        // console.log(34, subArrayFirst);
-        // console.log(35, subArraySecond);
         let containerArray = [];
         if(subArraySecond){
-            if(subArrayFirst.length === subArraySecond.length)
-            {
+                const amountOfOperations = subArrayFirst.length + subArraySecond.length;
                 let firstIndexIterator = 0 
                 let secondIndexIterator = 0;
-                console.log(firstIndexIterator, secondIndexIterator)
-                for(var j = 0; j < subArrayFirst.length; j++)
+                for(var j = 0; j < amountOfOperations; j++)
                 {
                     
                     let firstElement = subArrayFirst[firstIndexIterator];
                     let secondElement = subArraySecond[secondIndexIterator];
 
-                    console.log(45, firstElement)
-                    console.log(46, secondElement);
-    
-               
+                    if(firstElement !== undefined && secondElement !== undefined)
+                    {
+
+                        // console.log(43, firstElement);
+                        //     console.log(44, secondElement);
+                    
                         if(firstElement > secondElement)
                         {
                             containerArray.push(secondElement);
@@ -71,54 +73,86 @@ function merge(array) {
                             firstIndexIterator++;
                             secondIndexIterator++;
                         }
+                    }
+
+                    if(firstElement !== undefined && secondElement === undefined){
+                        containerArray.push(firstElement);
+                        firstIndexIterator++;
+                    }
+
+                    if(secondElement !== undefined && firstElement === undefined){
+                        containerArray.push(secondElement);
+                        secondIndexIterator++;
+                    }
+
                 }
                 console.log(59, containerArray);
     
-                mergedArrays.push(containerArray);
-            }   
-        } 
-        // else {
-        //     // console.log('!!!!!!!!!! ', mergedArrays);
-        //     // let containerArray = [];
-        //     let previousSubArray = mergedArrays[0];
-        //     let currentSubArray = subArrayFirst;
-        //     // console.log('previousSubArray ', previousSubArray);
-        //     // console.log('currentSubArray ', currentSubArray);
+                mergedArrays.push(containerArray); 
+        } else {
+            
+            let previousSubArray = mergedArrays[0];
+            let currentSubArray = subArrayFirst;
 
-        //     for(var j = 0; j < previousSubArray.length; j++)
-        //     {
-        //         let firstElement = previousSubArray[j];
-        //         let secondElement = currentSubArray[j];
-    
-        //         if(secondElement)
-        //         {
-        //             if(firstElement > secondElement)
-        //             {
-        //                 containerArray.push(secondElement);
-        //                 containerArray.push(firstElement);
-        //             }
+            console.log('previousSubArray ', previousSubArray);
+            console.log('currentSubArray ', currentSubArray);
+            // console.log('previousSubArray ', previousSubArray);
+            // console.log('currentSubArray ', currentSubArray);
+            let firstIndexIterator = 0 
+            let secondIndexIterator = 0;
+            const amountOfOperations = previousSubArray.length + currentSubArray.length;
 
-        //             if(firstElement < secondElement)
-        //             {
-        //                 containerArray.push(firstElement);
-        //                 containerArray.push(secondElement);
-        //             }
+            for(var j = 0; j < amountOfOperations; j++)
+            {
+                let firstElement = previousSubArray[firstIndexIterator];
+                let secondElement = currentSubArray[secondIndexIterator];
+                if(firstElement !== undefined && secondElement !== undefined)
+                {
 
-        //             if(firstElement === secondElement)
-        //             {
-        //                 containerArray.push(firstElement);
-        //                 containerArray.push(secondElement);
-        //             }
-        //         } else {
-        //             containerArray.push(firstElement);
-        //         }
-        //     }
+                    // console.log(43, firstElement);
+                    //     console.log(44, secondElement);
+                
+                    if(firstElement > secondElement)
+                    {
+                        containerArray.push(secondElement);
+                        secondIndexIterator++;
+                        // continue;
+                        // containerArray.push(firstElement);
+                    }
 
-        //     mergedArrays = containerArray;
-        // }
+                    if(firstElement < secondElement)
+                    {
+                        containerArray.push(firstElement);
+                        firstIndexIterator++;
+                        // continue;
+                        // containerArray.push(secondElement);
+                    }
+
+                    if(firstElement === secondElement)
+                    {
+                        containerArray.push(firstElement);
+                        containerArray.push(secondElement);
+                        firstIndexIterator++;
+                        secondIndexIterator++;
+                    }
+                }
+
+                if(firstElement !== undefined && secondElement === undefined){
+                    containerArray.push(firstElement);
+                    firstIndexIterator++;
+                }
+
+                if(secondElement !== undefined && firstElement === undefined){
+                    containerArray.push(secondElement);
+                    secondIndexIterator++;
+                }
+            }
+
+            mergedArrays = containerArray;
+        }
     }
 
-    if(iteration === 1)
+    if(iteration === 2)
     {
         console.log(107, mergedArrays)
         return;
@@ -129,7 +163,8 @@ function merge(array) {
     {
         return merge(mergedArrays);
     } else {
-        console.log(57, mergedArrays);
+        // console.log(57, mergedArrays);
+        return mergedArrays;
     }
 
 }
