@@ -5,27 +5,27 @@ let counter = 0;
 
 
 console.log('Income array ', arrayForSorting);
-mergeSort(arrayForSorting)
-arrayForSorting = merge(temporaryArray);
-console.log("Result of sorting ", arrayForSorting);
+merge(arrayForSorting)
+arrayForSorting = mergeSort(temporaryArray);
+console.log("Result of sorting ", arrayForSorting)
 
 
 
-function mergeSort(array) {
+function merge(array) {
     if(array.length > 0)
     {
         let middleOfArray = array.length >> 1;
         if(array.length !== 1)
         {
             counter ++;
-            return (mergeSort(array.slice(0, middleOfArray)), mergeSort(array.slice(middleOfArray)));
+            return (merge(array.slice(0, middleOfArray)), merge(array.slice(middleOfArray)));
         } else {
             temporaryArray.push(array);
         }
     }
 }
 
-function merge(array) {
+function mergeSort(array) {
     if(array.length < 2)
     {
         return array.flat();
@@ -143,7 +143,7 @@ function merge(array) {
 
     if(Array.isArray(mergedArrays[0]) && mergedArrays.length > 1)
     {
-        return merge(mergedArrays);
+        return mergeSort(mergedArrays);
     } else {
         return mergedArrays.flat();
     }
