@@ -1,7 +1,16 @@
-let arrayForSorting = [1,1,1,1,1,1,1]//[41, 58, 31, 59, 26, 41, 0, -1, 225, 516, -1488, -666];
+let arrayForSorting = [41, 58, 31, 59, 26, 41, 0, -1, 225, 516, -1488, -666];
 let temporaryArray = [];
+let iteration = 0;
+let counter = 0;
 
-let counter = 0
+
+console.log('Income array ', arrayForSorting);
+mergeSort(arrayForSorting)
+arrayForSorting = merge(temporaryArray);
+console.log("Result of sorting ", arrayForSorting);
+
+
+
 function mergeSort(array) {
     if(array.length > 0)
     {
@@ -16,28 +25,17 @@ function mergeSort(array) {
     }
 }
 
-mergeSort(arrayForSorting)
-
-let iteration = 0;
-console.log(22, temporaryArray)
-console.log(21, merge(temporaryArray));
-
 function merge(array) {
     if(array.length < 2)
     {
-        console.log(25, array);
         return array.flat();
     }
 
-    console.log('Iteration ', iteration);
-    console.log('##########', array);
     let mergedArrays = [];
     for(var i = 0; i < array.length; i+=2)
     {
         let subArrayFirst = array[i];
         let subArraySecond = array[i + 1];
-        console.log('subArrayFirst', subArrayFirst);
-        console.log('subArraySecond', subArraySecond);
 
         let containerArray = [];
         if(subArraySecond){
@@ -85,18 +83,13 @@ function merge(array) {
                     }
 
                 }
-                // console.log(59, containerArray);
-    
+
                 mergedArrays.push(containerArray); 
-                console.log(84, mergedArrays)
-        } else if(!(mergedArrays.length === 2 && subArrayFirst)) {
+        } else if(mergedArrays.length === 1 && subArrayFirst) {
             
                 let previousSubArray = mergedArrays[0];
                 let currentSubArray = subArrayFirst;
-                console.log(96, mergedArrays)
-    
-                console.log('previousSubArray ', previousSubArray);
-                console.log('currentSubArray ', currentSubArray);
+
                 let firstIndexIterator = 0 
                 let secondIndexIterator = 0;
                 const amountOfOperations = previousSubArray.length + currentSubArray.length;
@@ -146,20 +139,12 @@ function merge(array) {
         }
     }
 
-    // if(iteration === 2)
-    // {
-    //     console.log(107, mergedArrays)
-    //     return;
-    // }
     iteration++;
-
-    console.log(153, mergedArrays)
 
     if(Array.isArray(mergedArrays[0]) && mergedArrays.length > 1)
     {
         return merge(mergedArrays);
     } else {
-        // console.log(150, mergedArrays);
         return mergedArrays.flat();
     }
 
