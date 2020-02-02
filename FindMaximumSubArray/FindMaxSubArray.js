@@ -1,9 +1,10 @@
 
+var arrayExample = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
 
 
-findMaxCrossingSubarray(array,low,mid,high)
+function findMaxCrossingSubarray(array,low,mid,high)
 {
-    let leftSum = 0;
+    let leftSum = Number.NEGATIVE_INFINITY;
     let sum = 0;
     let maxLeft = 0;
     for(var i = mid; i>= low; i--){
@@ -14,10 +15,10 @@ findMaxCrossingSubarray(array,low,mid,high)
         }
     }
 
-    let rightSum = 0;
+    let rightSum = Number.NEGATIVE_INFINITY;
     sum = 0;
     let maxRight = 0;
-    for(var j = mid + 1; j>= high; j++){
+    for(var j = mid + 1; j<= high; j++){
         sum = sum + array[j];
         if(sum > rightSum){
             rightSum = sum;
@@ -25,5 +26,12 @@ findMaxCrossingSubarray(array,low,mid,high)
         }
     }
 
-    return (maxLeft,maxRight,leftSum+rightSum);
+    return {
+        maxLeft,
+        maxRight,
+        sum: leftSum+rightSum
+    };
 }
+
+
+console.log(findMaxCrossingSubarray(arrayExample,0,5,9));
