@@ -1,17 +1,22 @@
 
 const array1 = ['a','b','c','x']
-const array2 = ['z','y','x']
+const array2 = ['z','y','i']
 
-let exclusiveSet = new Set([...array1])
-console.log(exclusiveSet.values())
-
-for (let j = 0; j < array2.length; j++)
+function findMatches(arr1, arr2)
 {
-  if (exclusiveSet.has(array2[j])) {
-    console.log('Matching found')
-    break;
+  let exclusiveSet = new Set([...arr1])
+
+  for (let j = 0; j < arr2.length; j++) {
+    if (exclusiveSet.has(array2[j])) {
+      console.log('Matching found')
+      return true
+    }
   }
+
+  return false
 }
+
+console.log(findMatches(array1, array2))
 
 
 
