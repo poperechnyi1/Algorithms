@@ -8,6 +8,7 @@ function mergeSortedArrays(arr1, arr2) {
     maxLength = arr2.length
     mergedArray = merge(maxLength, arr2, arr1)
   } else if (arr2.length === arr1.length) {
+    console.log(11)
     maxLength = arr2.length
     mergedArray = merge(maxLength, arr2, arr1)
   } else if (arr1.length === 0 && arr2.length === 0){
@@ -19,19 +20,27 @@ function mergeSortedArrays(arr1, arr2) {
 
 function merge(iterationCount, arr1, arr2) {
   let mergedArray = []
+  let currentIndexArr1 = 0
+  let currentIndexArr2 = 0
   for (let i = 0; i < iterationCount; i++)
   {
     if (i < arr1.length && i < arr2.length) {
-      if (arr1[i] > arr2[i]) {
-        mergedArray.push(arr2[i])
-        mergedArray.push(arr1[i])
-      } else if (arr1[i] < arr2[i]) {
+      if (arr1[i] === arr2[i]) {
         mergedArray.push(arr1[i])
         mergedArray.push(arr2[i])
-      } else {
-        mergedArray.push(arr1[i])
-        mergedArray.push(arr2[i])
+        currentIndexArr1++
+        currentIndexArr2++
+        break;
       }
+
+      if (arr1[i] < arr2[i]) {
+        mergedArray.push(arr1[i])
+        currentIndexArr1++
+        break;
+      } 
+
+      mergedArray.push(arr2[i])
+      currentIndexArr2++
     }
 
     if (i < arr1.length && i >= arr2.length) {
