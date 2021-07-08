@@ -17,7 +17,6 @@ function merge(iterationCount, arr1, arr2) {
   let mergedArray = [];
   let iterationCount1 = 0;
   let iterationCount2 = 0;
-  console.log(iterationCount);
   for (let i = 0; i < iterationCount; i++) {
     if (
       (iterationCount1 === 0 && iterationCount2 === 0) ||
@@ -66,8 +65,6 @@ function merge(iterationCount, arr1, arr2) {
       }
     }
   }
-
-  console.log(mergedArray);
 
   if (arr1.length - 1 > iterationCount1) {
     for (let j = iterationCount1; j < arr1.length; j++) {
