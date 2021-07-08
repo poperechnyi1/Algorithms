@@ -1,5 +1,15 @@
 function mergeSortedArrays(arr1, arr2) {
-  let maxLength = arr1.length + arr2.length;
+  let valuesSet = new Set();
+  arr1.forEach((element) => {
+    valuesSet.add(element);
+  });
+  arr2.forEach((element) => {
+    valuesSet.add(element);
+  });
+  let maxLength =
+    valuesSet.size === 1 && arr1.length === arr2.length
+      ? arr1.length
+      : arr1.length + arr2.length;
   let mergedArray = [];
   if (arr1.length === 0 && arr2.length === 0) {
     return "Ooops arrays are empty";
@@ -31,7 +41,6 @@ function merge(iterationCount, arr1, arr2) {
       }
 
       if (arr1[iterationCount1] > arr2[iterationCount2]) {
-        console.log(35);
         mergedArray.push(arr2[iterationCount2]);
         iterationCount2++;
         continue;
@@ -81,9 +90,4 @@ function merge(iterationCount, arr1, arr2) {
   return mergedArray;
 }
 
-console.log(
-  mergeSortedArrays(
-    [-7, -6, -5, -4, -3, -2, -1, 0, 8],
-    [-105, 23, 88, 100, 110, 130, 140, 150, 160, 170]
-  )
-);
+console.log(mergeSortedArrays([0, 0], [-1, 0, 25, 135, 200, 300]));
