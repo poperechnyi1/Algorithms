@@ -1,36 +1,89 @@
 function mergeSortedArrays(arr1, arr2) {
-  let maxLength = 0
-  let mergedArray = []
-  if (arr1.length > 0 && arr1.length > arr2.length) {
-    maxLength = arr1.length
-    mergedArray = merge(maxLength, arr1, arr2)
-  } else if (arr2.length > 0 && arr2.length > arr1.length) {
-    maxLength = arr2.length
-    mergedArray = merge(maxLength, arr2, arr1)
-  } else if (arr2.length === arr1.length) {
-    console.log(11)
-    maxLength = arr2.length
-    mergedArray = merge(maxLength, arr2, arr1)
-  } else if (arr1.length === 0 && arr2.length === 0){
-    return 'Ooops arrays are empty'
+
+  if (arr1.length === 0 && arr2.length === 0) {
+    return "Ooops arrays are empty";
   }
 
-  return mergedArray
+  if (arr1.length === 0 && arr2.length > 0)
+  {
+    return arr2
+  }
+
+  if (arr1.length === 0 && arr2.length > 0)
+  {
+    return arr2
+  }
+
+  let valuesSet = new Set();
+  arr1.forEach((element) => {
+    valuesSet.add(element);
+  });
+  arr2.forEach((element) => {
+    valuesSet.add(element);
+  });
+  let maxLength =
+    valuesSet.size === 1 && arr1.length === arr2.length
+      ? arr1.length
+      : arr1.length + arr2.length;
+  let mergedArray = [];
+
+  mergedArray = merge(maxLength, arr1, arr2);
+
+  console.log(mergedArray)
+  if (valuesSet.size > 1 && mergedArray.length !== maxLength) {
+    return "Ooop something wrong with realization fo algorithm";
+  }
+  return mergedArray;
 }
 
 function merge(iterationCount, arr1, arr2) {
-  let mergedArray = []
-  let currentIndexArr1 = 0
-  let currentIndexArr2 = 0
-  for (let i = 0; i < iterationCount; i++)
-  {
-    if (i < arr1.length && i < arr2.length) {
-      if (arr1[i] === arr2[i]) {
-        mergedArray.push(arr1[i])
-        mergedArray.push(arr2[i])
-        currentIndexArr1++
-        currentIndexArr2++
-        break;
+  let mergedArray = [];
+  let iterationCount1 = 0;
+  let iterationCount2 = 0;
+  for (let i = 0; i < iterationCount; i++) {
+    if (
+      (iterationCount1 === 0 && iterationCount2 === 0) ||
+      iterationCount1 === iterationCount2
+    ) {
+      if (arr1[iterationCount1] === arr2[iterationCount2]) {
+        mergedArray.push(arr1[iterationCount1]);
+        mergedArray.push(arr2[iterationCount2]);
+        iterationCount1++;
+        iterationCount2++;
+        continue;
+      }
+
+      if (arr1[iterationCount1] > arr2[iterationCount2]) {
+        mergedArray.push(arr2[iterationCount2]);
+        iterationCount2++;
+        continue;
+      }
+
+      if (arr1[iterationCount1] < arr2[iterationCount2]) {
+        console.log(41);
+        mergedArray.push(arr1[iterationCount1]);
+        iterationCount1++;
+        continue;
+      }
+    } else {
+      if (arr1[iterationCount1] === arr2[iterationCount2]) {
+        mergedArray.push(arr1[iterationCount1]);
+        mergedArray.push(arr2[iterationCount2]);
+        iterationCount1++;
+        iterationCount2++;
+        continue;
+      }
+
+      if (arr1[iterationCount1] > arr2[iterationCount2]) {
+        mergedArray.push(arr2[iterationCount2]);
+        iterationCount2++;
+        continue;
+      }
+
+      if (arr1[iterationCount1] < arr2[iterationCount2]) {
+        mergedArray.push(arr1[iterationCount1]);
+        iterationCount1++;
+        continue;
       }
 
       if (arr1[i] < arr2[i]) {
@@ -42,17 +95,21 @@ function merge(iterationCount, arr1, arr2) {
       mergedArray.push(arr2[i])
       currentIndexArr2++
     }
+  }
 
-    if (i < arr1.length && i >= arr2.length) {
-      mergedArray.push(arr1[i])
-    } 
-
-    if (i >= arr1.length && i < arr2.length) {
-      mergedArray.push(arr2[i])
+  if (arr1.length - 1 > iterationCount1) {
+    for (let j = iterationCount1; j < arr1.length; j++) {
+      mergedArray.push(arr1[j]);
     }
   }
 
-  return mergedArray
+  if (arr2.length - 1 > iterationCount2) {
+    for (let k = iterationCount2; k < arr2.length; k++) {
+      mergedArray.push(arr2[k]);
+    }
+  }
+
+  return mergedArray;
 }
 
-console.log(mergeSortedArrays([0, 3, 4, 5, 31, 32], [3, 4, 6, 7, 30, 35]));
+console.log(mergeSortedArrays([0, 0], [-1, 0, 25, 135, 200, 300]));
